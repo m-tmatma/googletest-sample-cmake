@@ -9,7 +9,7 @@ DIR=build
 if [ "$(uname)" == 'Darwin' ]; then
     CMAKE=/Applications/CMake.app/Contents/bin/cmake
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
-    CMAKE=/usr/bin/cmake
+    CMAKE=cmake
 else
     echo "Your platform ($(uname -a)) is not supported."
     exit 1

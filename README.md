@@ -1,6 +1,9 @@
 # googletest-sample-cmake
 
-[![Build status](https://ci.appveyor.com/api/projects/status/1db5gf9jtf4s3tkc/branch/master?svg=true)](https://ci.appveyor.com/project/MasaruTsuchiyama/googletest-sample-cmake/branch/master)
+|CI|Status|
+|:---|:---|
+|appveyor|[![Build status](https://ci.appveyor.com/api/projects/status/1db5gf9jtf4s3tkc/branch/master?svg=true)](https://ci.appveyor.com/project/MasaruTsuchiyama/googletest-sample-cmake/branch/master)|
+|travis-ci|[![Build Status](https://travis-ci.org/m-tmatma/googletest-sample-cmake.svg?branch=master)](https://travis-ci.org/m-tmatma/googletest-sample-cmake)|
 
 This is an example for using GoogleTest and cmake
 

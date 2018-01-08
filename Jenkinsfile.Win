@@ -72,7 +72,7 @@ pipeline  {
 				}
 			}
 		}
-		stage('Build-off') {
+		stage('Build-off-Debug') {
 			steps {
 				script {
 					def	BUILD_DIR = "${env.WORKSPACE}\\build-off"
@@ -80,7 +80,7 @@ pipeline  {
 				}
 			}
 		}
-		stage('Build-off') {
+		stage('Build-off-Release') {
 			steps {
 				script {
 					def	BUILD_DIR = "${env.WORKSPACE}\\build-off"

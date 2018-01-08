@@ -27,6 +27,12 @@ or
     $ mkdir build-gtest-cmake
     $ cmake -G "Xcode" -Bbuild-gtest-cmake -H.
 
+## How to build
+
+    cmake --build build-gtest-cmake
+    cmake --build build-gtest-cmake --config Debug   
+    cmake --build build-gtest-cmake --config Release
+
 # How to create CMakeLists.txt which is project file for cmake
 
 ## How to create Solution Folder

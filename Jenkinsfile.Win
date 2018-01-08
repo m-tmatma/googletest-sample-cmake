@@ -5,7 +5,6 @@ pipeline  {
 		nuget = 'C:/Program Files (x86)/NuGet/nuget.exe'
 		cmake = 'C:/Program Files/CMake/bin/cmake.exe'
 		vcvarsall = 'C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary/Build/vcvarsall.bat'
-		devenv = 'C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/Common7/IDE/devenv.com'
 	}
 	agent any
 	
@@ -31,31 +30,73 @@ pipeline  {
 				}
 			}
 		}
-		stage('Build-on') {
-			steps {
-				script {
-					def	BUILD_DIR = "${env.WORKSPACE}\\build-on"
-					def BUILD_SHARED_LIBS = "1"
-					bat ("echo ${BUILD_DIR}")
-					bat ("cd")
-					bat ("if exist ${BUILD_DIR} rmdir /s /q ${BUILD_DIR}")
-					bat ("mkdir ${BUILD_DIR}")
-					bat ("\"%cmake%\" -D BUILD_SHARED_LIBS=${BUILD_SHARED_LIBS} -B${BUILD_DIR} -H${env.WORKSPACE}")
-					bat ("\"%devenv%\" ${BUILD_DIR}\\googletest-sample-cmake.sln /rebuild \"Release|Win32\"")
+		stage('configure') {
+			parallel {
+				stage('configure-Build-on') {
+					steps {
+						script {
+							def	BUILD_DIR = "${env.WORKSPACE}\\build-on"
+							def BUILD_SHARED_LIBS = "1"
+							bat ("echo ${BUILD_DIR}")
+							bat ("cd")
+							bat ("if exist ${BUILD_DIR} rmdir /s /q ${BUILD_DIR}")
+							bat ("mkdir ${BUILD_DIR}")
+							bat ("\"%cmake%\" -D BUILD_SHARED_LIBS=${BUILD_SHARED_LIBS} -B${BUILD_DIR} -H${env.WORKSPACE}")
+						}
+					}
+				}
+				stage('configure-Build-off') {
+					steps {
+						script {
+							def	BUILD_DIR = "${env.WORKSPACE}\\build-off"
+							def BUILD_SHARED_LIBS = "0"
+							bat ("echo ${BUILD_DIR}")
+							bat ("cd")
+							bat ("if exist ${BUILD_DIR} rmdir /s /q ${BUILD_DIR}")
+							bat ("mkdir ${BUILD_DIR}")
+							bat ("\"%cmake%\" -D BUILD_SHARED_LIBS=${BUILD_SHARED_LIBS} -B${BUILD_DIR} -H${env.WORKSPACE}")
+						}
+					}
 				}
 			}
 		}
-		stage('Build-off') {
-			steps {
-				script {
-					def	BUILD_DIR = "${env.WORKSPACE}\\build-off"
-					def BUILD_SHARED_LIBS = "0"
-					bat ("echo ${BUILD_DIR}")
-					bat ("cd")
-					bat ("if exist ${BUILD_DIR} rmdir /s /q ${BUILD_DIR}")
-					bat ("mkdir ${BUILD_DIR}")
-					bat ("\"%cmake%\" -D BUILD_SHARED_LIBS=${BUILD_SHARED_LIBS} -B${BUILD_DIR} -H${env.WORKSPACE}")
-					bat ("\"%devenv%\" ${BUILD_DIR}\\googletest-sample-cmake.sln /rebuild \"Release|Win32\"")
+		stage('build-Debug') {
+			parallel {
+				stage('Build-on-Debug') {
+					steps {
+						script {
+							def	BUILD_DIR = "${env.WORKSPACE}\\build-on"
+							bat ("\"%cmake%\" --build ${BUILD_DIR} --config Debug")
+						}
+					}
+				}
+				stage('Build-off-Debug') {
+					steps {
+						script {
+							def	BUILD_DIR = "${env.WORKSPACE}\\build-off"
+							bat ("\"%cmake%\" --build ${BUILD_DIR} --config Debug")
+						}
+					}
+				}
+			}
+		}
+		stage('build-Release') {
+			parallel {
+				stage('Build-on-Release') {
+					steps {
+						script {
+							def	BUILD_DIR = "${env.WORKSPACE}\\build-on"
+							bat ("\"%cmake%\" --build ${BUILD_DIR} --config Release")
+						}
+					}
+				}
+				stage('Build-off-Release') {
+					steps {
+						script {
+							def	BUILD_DIR = "${env.WORKSPACE}\\build-off"
+							bat ("\"%cmake%\" --build ${BUILD_DIR} --config Release")
+						}
+					}
 				}
 			}
 		}

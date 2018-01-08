@@ -2,8 +2,8 @@
 
 pipeline  {
 	environment {
-		make = '/usr/bin/make'
 		cmake = '/Applications/CMake.app/Contents/bin/cmake'
+		build_tool_option = 'VERBOSE=1 -j 4'
 	}
 	agent any
 	stages {
@@ -30,7 +30,7 @@ pipeline  {
 					}
 					sh ("mkdir ${BUILD_DIR}")
 					sh ("${cmake} -D BUILD_SHARED_LIBS=${BUILD_SHARED_LIBS} -B${BUILD_DIR} -H${env.WORKSPACE}")
-					sh ("${make} -j 4 -C ${BUILD_DIR}")
+					sh ("${cmake} --build ${BUILD_DIR} -- ${build_tool_option}")
 				}
 			}
 		}
@@ -44,7 +44,7 @@ pipeline  {
 					}
 					sh ("mkdir ${BUILD_DIR}")
 					sh ("${cmake} -D BUILD_SHARED_LIBS=${BUILD_SHARED_LIBS} -B${BUILD_DIR} -H${env.WORKSPACE}")
-					sh ("${make} -j 4 -C ${BUILD_DIR}")
+					sh ("${cmake} --build ${BUILD_DIR} -- ${build_tool_option}")
 				}
 			}
 		}

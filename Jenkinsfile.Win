@@ -60,7 +60,7 @@ pipeline  {
 				}
 			}
 		}
-		stage('build') {
+		stage('build-Debug') {
 			parallel {
 				stage('Build-on-Debug') {
 					steps {
@@ -70,19 +70,23 @@ pipeline  {
 						}
 					}
 				}
-				stage('Build-on-Release') {
-					steps {
-						script {
-							def	BUILD_DIR = "${env.WORKSPACE}\\build-on"
-							bat ("\"%cmake%\" --build ${BUILD_DIR} --config Release")
-						}
-					}
-				}
 				stage('Build-off-Debug') {
 					steps {
 						script {
 							def	BUILD_DIR = "${env.WORKSPACE}\\build-off"
 							bat ("\"%cmake%\" --build ${BUILD_DIR} --config Debug")
+						}
+					}
+				}
+			}
+		}
+		stage('build-Release') {
+			parallel {
+				stage('Build-on-Release') {
+					steps {
+						script {
+							def	BUILD_DIR = "${env.WORKSPACE}\\build-on"
+							bat ("\"%cmake%\" --build ${BUILD_DIR} --config Release")
 						}
 					}
 				}

@@ -19,8 +19,7 @@ or
 
 ## How to generate projects for Visual Studio
 
-    > mkdir build-gtest-cmake
-    > cmake -G "Visual Studio 15 2017" -Bbuild-gtest-cmake -H.
+    > cmake -G "Visual Studio 15 2017" -B build -S .
 
 ## How to generate projects for Xcode
 

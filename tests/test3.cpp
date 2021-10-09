@@ -56,7 +56,7 @@ const ValueResult valuesAdd[] =
     {1, 2, 3},
 };
 
-INSTANTIATE_TEST_CASE_P(TestTestParamInstance,
+INSTANTIATE_TEST_SUITE_P(TestTestParamInstance,
                         TestTestParamAdd,
                         ::testing::ValuesIn(valuesAdd));
 
@@ -67,7 +67,7 @@ const ValueResult valuesSubtract[] =
     {3, 2, 1},
 };
 
-INSTANTIATE_TEST_CASE_P(TestTestParamInstance,
+INSTANTIATE_TEST_SUITE_P(TestTestParamInstance,
                         TestTestParamSubtract,
                         ::testing::ValuesIn(valuesSubtract));
 
@@ -78,7 +78,7 @@ const ValueResult valuesDivide[] =
     {3, 2, 1},
 };
 
-INSTANTIATE_TEST_CASE_P(TestTestParamInstance,
+INSTANTIATE_TEST_SUITE_P(TestTestParamInstance,
                         TestTestParamDivide,
                         ::testing::ValuesIn(valuesDivide));
 

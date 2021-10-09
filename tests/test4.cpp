@@ -39,7 +39,7 @@ void PrintTo(const ValueResult& value, std::ostream* os)
 }
 
 
-INSTANTIATE_TEST_CASE_P(TestTestParamInstance,
+INSTANTIATE_TEST_SUITE_P(TestTestParamInstance,
                         TestParamName,
                         ::testing::ValuesIn(valuesAdd),
                         ::testing::PrintToStringParamName()

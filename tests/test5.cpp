@@ -52,7 +52,7 @@ void PrintTo(const Parameters& params, std::ostream* os)
 }
 
 
-INSTANTIATE_TEST_CASE_P(TestTestParamInstance,
+INSTANTIATE_TEST_SUITE_P(TestTestParamInstance,
                         TestParamNameCombine,
                         ::testing::Combine(
                             ::testing::ValuesIn(desc),

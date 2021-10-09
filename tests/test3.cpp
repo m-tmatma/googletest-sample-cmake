@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include "calc.h"
 
+namespace {
+
 struct ValueResult
 {
     int a;
@@ -80,4 +82,6 @@ INSTANTIATE_TEST_CASE_P(TestTestParamInstance,
                         TestTestParamDivide,
                         ::testing::ValuesIn(valuesDivide));
 
+
+} // end of namespace
 

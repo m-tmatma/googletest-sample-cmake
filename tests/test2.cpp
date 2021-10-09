@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include "calc.h"
 
+namespace {
+
 class TestTest : public ::testing::Test
 {
 public:
@@ -39,3 +41,5 @@ TEST_F(TestTest, DivideByZero)
 {
 	ASSERT_THROW(m_pCalc->Divide(2, 0), DivideByZeroException);
 }
+
+} // end of namespace

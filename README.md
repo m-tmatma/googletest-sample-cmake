@@ -23,8 +23,7 @@ or
 
 ## How to generate projects for Xcode
 
-    $ mkdir build-gtest-cmake
-    $ cmake -G "Xcode" -Bbuild-gtest-cmake -H.
+    $ cmake -G "Xcode" -B build -S .
 
 ## How to build
 

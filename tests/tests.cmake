@@ -17,6 +17,8 @@ else()
   add_executable(${project_name} ${SRC})
 endif (CUSTOM_MAIN)
 
+add_test(NAME ${project_name} COMMAND ${project_name})
+
 # use shared library version
 # this is required when using parameterized test
 if (BUILD_SHARED_LIBS)

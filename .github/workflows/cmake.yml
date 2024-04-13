@@ -65,7 +65,7 @@ jobs:
 
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/linux@v2
-      if: always()
+      if: runner.os == 'Linux' || runner.os == 'macOS'
       with:
         files: |
           output/**/*.xml

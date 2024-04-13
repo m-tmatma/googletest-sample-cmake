@@ -55,7 +55,8 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       run: |
         mkdir -p output
-        find ${{github.workspace}}/build/bin/ -type f -and -executable | xargs -I {} sh -c 'echo "Running {}"; {} --gtest_output=xml:output/'
+        build/bin/tests-custom --gtest_output=xml:output/
+        build/bin/tests-shared --gtest_output=xml:output/
 
     - name: Show Output
       working-directory: ${{github.workspace}}/build

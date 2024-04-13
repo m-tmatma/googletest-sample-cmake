@@ -68,5 +68,5 @@ jobs:
       if: runner.os == 'Linux' || runner.os == 'macOS'
       with:
         files: |
-          output/**/*.xml
+          output/*.xml
 

@@ -52,6 +52,7 @@ jobs:
 
     - name: Test
       if: matrix.os == 'ubuntu-latest'
+      working-directory: ${{github.workspace}}/build
       run: |
         ${{github.workspace}}/build/bin/tests-custom --gtest_output=xml:output/
         ${{github.workspace}}/build/bin/tests-shared --gtest_output=xml:output/

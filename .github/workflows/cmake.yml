@@ -2,13 +2,17 @@ name: CMake
 
 on:
   push:
-    branches: 
+    branches:
       - master
       - feature/*
   pull_request:
-    branches: 
+    branches:
       - master
       - feature/*
+
+permissions:
+  checks: write
+  pull-requests: write
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
@@ -47,7 +51,28 @@ jobs:
       run: ctest -C ${{env.BUILD_TYPE}}  --verbose
 
     - name: Test
-      if: matrix.os == 'ubuntu-latest'
       working-directory: ${{github.workspace}}/build
-      run: find ${{github.workspace}}/build/bin/ -type f -and -executable | xargs -n 1 sh -c
-      
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        mkdir -p output
+        find ${{github.workspace}}/build/bin/ -type f -and -executable | xargs -I {} sh -c 'echo "Running {}"; {} --gtest_output=xml:output/'
+
+    - name: Show Output
+      working-directory: ${{github.workspace}}/build
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        find output
+
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: ${{github.workspace}}/build/output
+
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action/linux@v2
+      if: matrix.os == 'ubuntu-latest'
+      #if: runner.os == 'Linux'
+      with:
+        files: |
+          ${{github.workspace}}/build/output/*.xml

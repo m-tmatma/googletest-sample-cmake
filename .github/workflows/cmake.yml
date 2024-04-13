@@ -2,11 +2,11 @@ name: CMake
 
 on:
   push:
-    branches: 
+    branches:
       - master
       - feature/*
   pull_request:
-    branches: 
+    branches:
       - master
       - feature/*
 
@@ -49,5 +49,7 @@ jobs:
     - name: Test
       if: matrix.os == 'ubuntu-latest'
       working-directory: ${{github.workspace}}/build
-      run: find ${{github.workspace}}/build/bin/ -type f -and -executable | xargs -n 1 sh -c
-      
+      run: |
+        mkdir -p output
+        find ${{github.workspace}}/build/bin/ -type f -and -executable | xargs -I{} -n 1 sh -c {} —gtest_output=xml:output/
+

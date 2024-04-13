@@ -52,4 +52,5 @@ jobs:
       run: |
         mkdir -p output
         find ${{github.workspace}}/build/bin/ -type f -and -executable | xargs -I{} -n 1 sh -x -c {} —gtest_output=xml:output/
+        find output -name "*.xml" | xargs ls -l
 

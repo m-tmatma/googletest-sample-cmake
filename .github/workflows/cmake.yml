@@ -73,7 +73,7 @@ jobs:
     - name: Upload Test Results
       uses: actions/upload-artifact@v4
       with:
-        name: test-results
+        name: test-results ${{ matrix.os }} ${{env.BUILD_TYPE}}
         path: ${{github.workspace}}/build/output
 
     - name: Publish Test Results(Linux)

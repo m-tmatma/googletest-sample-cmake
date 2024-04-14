@@ -89,3 +89,10 @@ jobs:
       with:
         files: |
           ${{github.workspace}}\build\output\*.xml
+
+    - name: Publish Test Results(macos)
+      uses: EnricoMi/publish-unit-test-result-action/macos@v2
+      if: runner.os == 'Windows'
+      with:
+        files: |
+          ${{github.workspace}}/build/output/*.xml

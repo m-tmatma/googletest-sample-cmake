@@ -89,3 +89,11 @@ jobs:
       with:
         files: |
           ${{github.workspace}}\build\output\*.xml
+
+    - name: Publish Test Report
+      uses: dorny/test-reporter@v1
+      with:
+        name: Googletest result
+        path: ${{github.workspace}}/build/output/*.xml
+        reporter: jest-junit
+        

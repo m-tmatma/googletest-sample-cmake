@@ -30,7 +30,7 @@ jobs:
       working-directory: ${{github.workspace}}/prog
 
     - name: run
-      run:  ./a.out
+      run:  ./main
       working-directory: ${{github.workspace}}/prog
 
     - name: gcovr_result

@@ -1,0 +1,38 @@
+name: gcovr
+
+on:
+  push:
+    branches:
+      - master
+      - feature/*
+  pull_request:
+    branches:
+      - master
+      - feature/*
+
+permissions:
+  checks: write
+  pull-requests: write
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: build
+      run:  gcc --coverage -o main main.c
+      working-directory: ${{github.workspace}}/prog
+
+    - name: run
+      run:  ./a.out
+      working-directory: ${{github.workspace}}/prog
+
+    - name: gcovr_result
+      run:  gcovr --xml --output=gcovr_result.xml  .
+      working-directory: ${{github.workspace}}/prog

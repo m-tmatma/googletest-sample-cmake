@@ -93,5 +93,5 @@ jobs:
     - name: Publish Test Report
       uses: dorny/test-reporter@v1
       with:
-        test-results: ${{github.workspace}}/build/output/*.xml
+        path: ${{github.workspace}}/build/output/*.xml
         

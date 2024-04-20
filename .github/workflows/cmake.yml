@@ -95,4 +95,5 @@ jobs:
       with:
         name: Googletest result
         path: ${{github.workspace}}/build/output/*.xml
+        reporter: jest-junit
         

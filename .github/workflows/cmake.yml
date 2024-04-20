@@ -92,7 +92,6 @@ jobs:
 
     - name: Publish Test Report
       uses: dorny/test-reporter@v1
-      working-directory: ${{github.workspace}}/build
       with:
-        test-results: output/*.xml
+        test-results: ${{github.workspace}}/build/output/*.xml
         
